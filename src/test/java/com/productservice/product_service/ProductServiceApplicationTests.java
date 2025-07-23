@@ -2,7 +2,6 @@ package com.productservice.product_service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.productservice.product_service.dto.ProductRequest;
 import com.productservice.product_service.repository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,6 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -89,13 +87,6 @@ class ProductServiceApplicationTests {
         Assertions.assertEquals(1, productRepository.findAll().size());
 	}
 
-	private ProductRequest getProductRequest(){
-		return ProductRequest.builder()
-				.name("iPhone 14")
-				.description("Apple iPhone 14")
-				.price(BigDecimal.valueOf(1200))
-				.build();
-	}
 
 	private String buildGraphQLRequest(String queryOrMutation) throws JsonProcessingException {
 		return objectMapper.writeValueAsString(Map.of("query", queryOrMutation));
